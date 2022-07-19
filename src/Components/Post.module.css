@@ -1,0 +1,131 @@
+.post {
+    background: var(--gray-800);
+    border-radius: 8px;
+}
+
+.post + .post {
+    margin-top: 2rem;   
+}
+
+.post > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 2.5rem 1.5rem;
+    flex-wrap: wrap;
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+}
+
+.authorInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.authorInfo strong {
+    line-height: 1.6;
+    color: var(--gray-100);
+}
+
+.authorInfo > span {
+    font-size: .875rem;
+    line-height: 1.6;
+    color: var(--gray-400);
+}
+
+.post header > time {
+    font-size: .875rem; 
+    color: var(--gray-400);
+}
+
+.content {
+    padding: 0 2.5rem;
+    line-height: 1.6rem;
+}
+
+.content p {
+    margin-top: 1rem;
+}
+
+.content a {
+    color: var(--green-500);
+    font-weight: bold ;
+    margin-left: .5rem;
+}
+
+.content a:hover {
+    color: var(--green-300);
+}
+
+.writePost {
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem;
+    border-top: 1px solid var(--gray-600);
+    padding: 1.5rem 0 2.5rem;
+}
+
+.writePost textarea {
+    width: 100%;
+    border: none;
+    height: 6rem;
+    background: var(--gray-900);
+    border-radius: 8px;
+    color: var(--gray-300);
+    padding: .812rem 1rem;
+    margin: 1rem 0;
+    resize: none;
+    line-height: 1.4;
+}
+
+.writePost footer {
+    visibility: hidden;
+    max-height: 0;
+}
+
+.writePost:focus-within footer {
+    visibility: visible;
+    max-height: none;
+}
+
+.buttonPost {
+    width: 6.75rem;
+    font-weight: 700;
+    border-radius: 8px;
+    color: var(--white);
+    background: var(--green-500);
+    padding: 1rem 1.5rem .875rem;
+    border: none;
+    cursor: pointer;
+
+    transition: background-color .1s;
+}
+
+.buttonPost:hover {
+    background-color: var(--green-300);
+}
+
+.commentList {
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+
+    .author {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    time {
+        width: 100%;
+        text-align: center;
+    }
+
+}
