@@ -84,6 +84,7 @@
     line-height: 1.4;
 }
 
+
 .writePost footer {
     visibility: hidden;
     max-height: 0;
@@ -93,6 +94,7 @@
     visibility: visible;
     max-height: none;
 }
+
 
 .buttonPost {
     width: 6.75rem;
