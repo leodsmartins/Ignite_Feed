@@ -10,17 +10,44 @@ import { useState } from 'react';
 
 export function Post({ author, publishedAt, content }) {
 
-const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {locale: ptBR});
-const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {locale: ptBR, addSuffix: true});
+    const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {locale: ptBR});
+    const publishedDateRelativeNow = formatDistanceToNow(publishedAt, {locale: ptBR, addSuffix: true});
 
 
-const [comments, setComments] = useState([1,2]);
+    const [comments, setComments] = useState([
+        'Primeiro comentário para teste!'
+    ]);
 
-function handleCreateNewComment() {
-    preventDefault();
-    setComments([...comments, comments.length + 1]);
+    const [newCommentText, setNewCommentText] = useState('');
 
-}
+    function handleCreateNewComment() {
+        event.preventDefault();
+
+        setComments([...comments, newCommentText]);
+        
+        setNewCommentText('');
+    }
+
+    function handleNewCommentChange() {
+        event.target.setCustomValidity('');
+        setNewCommentText(event.target.value);
+    }
+
+    function handleNewCommentInvalid() {
+        event.target.setCustomValidity('Este campo é obrigatório!');
+    }
+
+    function onDeleteComment(commentToDelete) {
+        const commentsWithoutDeletedOne = comments.filter(comment => {
+            return comment !== commentToDelete; 
+        })
+
+        setComments(commentsWithoutDeletedOne);
+    }
+
+    const isNewCommentEmpty = newCommentText.length === 0;
+
+
     return (
         <article className={styles.post}>
             <header>
@@ -37,12 +64,12 @@ function handleCreateNewComment() {
                 {content.map(line => {
                     if (line.type === 'paragraphy') {
                             return (
-                                <p>{line.content}</p>
+                                <p key={line.content}>{line.content}</p>
                             )
                     }
                     else if (line.type === 'link') {
                         return (
-                            <p><a href='#'>{line.content}</a></p>
+                            <p key={line.content}><a href='#'>{line.content}</a></p>
                         )
                     }
                 })}
@@ -50,17 +77,34 @@ function handleCreateNewComment() {
             </div>
             <form onSubmit={handleCreateNewComment} className={styles.writePost}>
                 <strong>Deixe seu feedback</strong>
+
                 <textarea  
                     placeholder="Escreva um comentário..." 
+                    name="comment"
+                    onChange={handleNewCommentChange}
+                    value={newCommentText}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
+
                 <footer>
-                    <button className={styles.buttonPost} type="submit">Publicar</button>
+                    <button 
+                        className={styles.buttonPost} 
+                        type="submit" 
+                        disabled={isNewCommentEmpty}>
+                            Publicar
+                    </button>
                 </footer>
+
             </form>
             <div className={styles.commentList}>
                 {comments.map(comment => {
-                    return <Comment />
-                })}
+                    return <Comment 
+                            key={comment} 
+                            content={comment} 
+                            onDeleteComment={onDeleteComment}
+                        />
+                })} 
             </div>
         </article>
     )
