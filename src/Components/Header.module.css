@@ -1,17 +1,17 @@
 .header {
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-padding: 1.25rem 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1.25rem 0;
 }
 
 .header p {
-    font-size: 1.60rem;
-    font-weight: bold;
-    align-self: center;
-    padding-left: 1rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  align-self: center;
+  padding-left: 1rem;
 }
 
 .header img {
-    width: 4rem;
+  width: 4rem;
 }
